@@ -1,6 +1,6 @@
-from django.urls import path
-from god.views import TestView
+from rest_framework import routers
+from god.views import CreateServiceView
 
-urlpatterns = [
-    path('test/', TestView.as_view()),
-]
+
+router = routers.DefaultRouter()
+router.register('service/create', CreateServiceView)
