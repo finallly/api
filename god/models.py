@@ -7,6 +7,9 @@ class ServiceModel(models.Model):
     interface = models.CharField(max_length=100)
     available_interfaces = models.JSONField()
 
+    def __str__(self):
+        return self.name
+
 
 class LogModel(models.Model):
     log_data = models.JSONField()

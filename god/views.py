@@ -1,33 +1,27 @@
-import json
+from rest_framework import viewsets, mixins
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
-from rest_framework import viewsets
-from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
-from django.http import JsonResponse
-
-from .models import ServiceModel
-from .serializers import ServiceSerializer
-from .models import ServiceModel as model
+from .models import ServiceModel, LogModel
+from .serializers import ServiceSerializer, LogSerializer
 
 
-class ServiceView(viewsets.GenericViewSet):
+class ServiceView(mixins.ListModelMixin,
+                  mixins.CreateModelMixin,
+                  mixins.UpdateModelMixin,
+                  mixins.DestroyModelMixin,
+                  mixins.RetrieveModelMixin,
+                  viewsets.GenericViewSet):
+
     queryset = ServiceModel.objects.all()
     serializer_class = ServiceSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
-    def list(self, request):
-        queryset = self.get_queryset()
-        serializer = ServiceSerializer(queryset, many=True)
-        return Response(serializer.data, status=200)
 
-    def retrieve(self, request, pk):
-        queryset = self.get_queryset()
-        try:
-            service = queryset.get(pk=pk)
-            serializer = ServiceSerializer(service)
-            return Response(serializer.data, status=200)
-        except model.DoesNotExist:
-            return JsonResponse(data={'error': 'such service does not exist'}, status=404)
+class LogView(mixins.ListModelMixin,
+              mixins.CreateModelMixin,
+              mixins.RetrieveModelMixin,
+              viewsets.GenericViewSet):
 
-    def create(self, request):
-        pass
+    queryset = LogModel.objects.all()
+    serializer_class = LogSerializer
+    permission_classes = [IsAuthenticated]
