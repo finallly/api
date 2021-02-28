@@ -1,5 +1,5 @@
 from rest_framework import viewsets, mixins
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
+from rest_framework.permissions import IsAuthenticated
 
 from .models import ServiceModel, LogModel
 from .serializers import ServiceSerializer, LogSerializer
@@ -14,7 +14,7 @@ class ServiceView(mixins.ListModelMixin,
 
     queryset = ServiceModel.objects.all()
     serializer_class = ServiceSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticated]
 
 
 class LogView(mixins.ListModelMixin,

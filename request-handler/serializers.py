@@ -13,4 +13,4 @@ class LogSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = LogModel
-        fields = ('id', 'log_data', 'service')
+        fields = ('id', 'date_time', 'log_data', 'service')

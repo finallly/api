@@ -12,5 +12,6 @@ class ServiceModel(models.Model):
 
 
 class LogModel(models.Model):
-    log_data = models.JSONField()
+    date_time = models.DateTimeField()
+    log_data = models.JSONField(default=dict)
     service = models.ForeignKey(ServiceModel, on_delete=models.CASCADE)
