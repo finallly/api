@@ -63,4 +63,8 @@ env.bak/
 venv.bak/
 
 #
+<<<<<<< HEAD
 request-handler/migrations
+=======
+request_handler/migrations
+>>>>>>> feachure
