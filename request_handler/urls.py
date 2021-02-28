@@ -1,7 +1,7 @@
 from django.urls import path
 from rest_framework.authtoken import views
 from api.yasg import urlpatterns as docs
-from god.views import ServiceView, LogView
+from request_handler.views import ServiceView, LogView
 
 urlpatterns = [
     path('auth/', views.obtain_auth_token, name='api-token-auth'),

@@ -1,6 +1,6 @@
 from django.urls import path, include
 from django.contrib import admin
-from god.urls import urlpatterns as api_urlpatterns
+from request_handler.urls import urlpatterns as api_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
