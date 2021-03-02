@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import ServiceModel, LogModel
+from .models import ServiceModel, LogModel, StatisticsModel
 
 
 class ServiceSerializer(serializers.ModelSerializer):
@@ -9,15 +9,6 @@ class ServiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = ServiceModel
         fields = ('id', 'name', 'status', 'interface', 'available_interfaces')
-
-
-class LogSerializer(serializers.ModelSerializer):
-    """
-    serializer for log model
-    """
-    class Meta:
-        model = LogModel
-        fields = ('id', 'log_data', 'service', 'date_time')
 
 
 class ServiceUpdateStatusSerializer(serializers.ModelSerializer):
@@ -45,3 +36,21 @@ class ServiceUpdateInterfacesSerializer(serializers.ModelSerializer):
     class Meta:
         model = ServiceModel
         fields = ('available_interfaces', )
+
+
+class LogSerializer(serializers.ModelSerializer):
+    """
+    serializer for log model
+    """
+    class Meta:
+        model = LogModel
+        fields = ('id', 'log_data', 'service', 'date_time')
+
+
+class StatisticsSerializer(serializers.ModelSerializer):
+    """
+    serializer for statistics model
+    """
+    class Meta:
+        model = StatisticsModel
+        fields = ('id', 'statistics', 'service', 'date_time')

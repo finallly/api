@@ -15,3 +15,9 @@ class LogModel(models.Model):
     date_time = models.DateTimeField()
     log_data = models.JSONField()
     service = models.ForeignKey(ServiceModel, on_delete=models.CASCADE)
+
+
+class StatisticsModel(models.Model):
+    date_time = models.DateTimeField()
+    statistics = models.JSONField()
+    service = models.ForeignKey(ServiceModel, on_delete=models.CASCADE)

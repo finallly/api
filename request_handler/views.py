@@ -1,9 +1,9 @@
 from rest_framework import viewsets, mixins
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 
-from .models import ServiceModel, LogModel
+from .models import ServiceModel, LogModel, StatisticsModel
 from .serializers import ServiceSerializer, ServiceUpdateStatusSerializer, LogSerializer, \
-    ServiceUpdateInterfaceSerializer
+    ServiceUpdateInterfaceSerializer, ServiceUpdateInterfacesSerializer, StatisticsSerializer
 
 
 class ServiceView(mixins.ListModelMixin,
@@ -24,7 +24,7 @@ class ServiceView(mixins.ListModelMixin,
 class ServiceStatusView(mixins.UpdateModelMixin,
                         viewsets.GenericViewSet):
     """
-    view for updating service status C
+    view for updating service status U
     """
 
     queryset = ServiceModel.objects.all()
@@ -35,7 +35,7 @@ class ServiceStatusView(mixins.UpdateModelMixin,
 class ServiceInterfaceView(mixins.UpdateModelMixin,
                            viewsets.GenericViewSet):
     """
-    view for updating service interface C
+    view for updating service interface U
     """
 
     queryset = ServiceModel.objects.all()
@@ -46,11 +46,11 @@ class ServiceInterfaceView(mixins.UpdateModelMixin,
 class ServiceInterfacesView(mixins.UpdateModelMixin,
                             viewsets.GenericViewSet):
     """
-    view for updating service interfaces list C
+    view for updating service interfaces list U
     """
 
     queryset = ServiceModel.objects.all()
-    serializer_class = ServiceUpdateInterfaceSerializer
+    serializer_class = ServiceUpdateInterfacesSerializer
     permission_classes = [IsAuthenticated]
 
 
@@ -64,4 +64,17 @@ class LogView(mixins.ListModelMixin,
 
     queryset = LogModel.objects.all()
     serializer_class = LogSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+
+class StatisticsView(mixins.ListModelMixin,
+                     mixins.CreateModelMixin,
+                     mixins.RetrieveModelMixin,
+                     viewsets.GenericViewSet):
+    """
+    view for actions of statistics model CR
+    """
+
+    queryset = StatisticsModel.objects.all()
+    serializer_class = StatisticsSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]

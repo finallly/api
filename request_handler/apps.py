@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class GodConfig(AppConfig):
+class RequestHandlerConfig(AppConfig):
     name = 'request_handler'
