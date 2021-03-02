@@ -17,7 +17,7 @@ class LogSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = LogModel
-        fields = ('id', 'log_data', 'service')
+        fields = ('id', 'log_data', 'service', 'date_time')
 
 
 class ServiceUpdateStatusSerializer(serializers.ModelSerializer):
