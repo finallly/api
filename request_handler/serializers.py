@@ -38,6 +38,15 @@ class ServiceUpdateInterfacesSerializer(serializers.ModelSerializer):
         fields = ('available_interfaces', )
 
 
+class ServiceRenameSerializer(serializers.ModelSerializer):
+    """
+
+    """
+    class Meta:
+        model = ServiceModel
+        fields = ('name', )
+
+
 class LogSerializer(serializers.ModelSerializer):
     """
     serializer for log model

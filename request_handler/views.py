@@ -3,7 +3,7 @@ from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnl
 
 from .models import ServiceModel, LogModel, StatisticsModel
 from .serializers import ServiceSerializer, ServiceUpdateStatusSerializer, LogSerializer, \
-    ServiceUpdateInterfaceSerializer, ServiceUpdateInterfacesSerializer, StatisticsSerializer
+    ServiceUpdateInterfaceSerializer, ServiceUpdateInterfacesSerializer, StatisticsSerializer, ServiceRenameSerializer
 
 
 class ServiceView(mixins.ListModelMixin,
@@ -51,6 +51,17 @@ class ServiceInterfacesView(mixins.UpdateModelMixin,
 
     queryset = ServiceModel.objects.all()
     serializer_class = ServiceUpdateInterfacesSerializer
+    permission_classes = [IsAuthenticated]
+
+
+class ServiceRenameView(mixins.UpdateModelMixin,
+                        viewsets.GenericViewSet):
+    """
+    view for renaming a service U
+    """
+
+    queryset = ServiceModel.objects.all()
+    serializer_class = ServiceRenameSerializer
     permission_classes = [IsAuthenticated]
 
 
