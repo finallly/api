@@ -8,7 +8,16 @@ class ServiceSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = ServiceModel
-        fields = ('id', 'name', 'status', 'interface', 'available_interfaces')
+        fields = ('id', 'name', 'status', 'state', 'interface', 'available_interfaces')
+
+
+class ServiceUpdateStateSerializer(serializers.ModelSerializer):
+    """
+    serializer for service status updating
+    """
+    class Meta:
+        model = ServiceModel
+        fields = ('state', )
 
 
 class ServiceUpdateStatusSerializer(serializers.ModelSerializer):
@@ -26,7 +35,7 @@ class ServiceUpdateInterfaceSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = ServiceModel
-        fields = ('interface', )
+        fields = ('active_interface', )
 
 
 class ServiceUpdateInterfacesSerializer(serializers.ModelSerializer):
