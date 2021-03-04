@@ -1,9 +1,12 @@
+from django.http import JsonResponse
 from rest_framework import viewsets, mixins
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 
 from .models import ServiceModel, LogModel, StatisticsModel
-from .serializers import ServiceSerializer, ServiceUpdateStatusSerializer, LogSerializer, \
-    ServiceUpdateInterfaceSerializer, ServiceUpdateInterfacesSerializer, StatisticsSerializer, ServiceRenameSerializer
+from api.settings import STATE_CONSTS
+from .serializers import ServiceSerializer, ServiceUpdateStateSerializer, LogSerializer, \
+    ServiceUpdateInterfaceSerializer, ServiceUpdateInterfacesSerializer, StatisticsSerializer, ServiceRenameSerializer,\
+    ServiceUpdateStatusSerializer
 
 
 class ServiceView(mixins.ListModelMixin,
@@ -18,6 +21,17 @@ class ServiceView(mixins.ListModelMixin,
 
     queryset = ServiceModel.objects.all()
     serializer_class = ServiceSerializer
+    permission_classes = [IsAuthenticated]
+
+
+class ServiceStateView(mixins.UpdateModelMixin,
+                       viewsets.GenericViewSet):
+    """
+    view for updating service status U
+    """
+
+    queryset = ServiceModel.objects.all()
+    serializer_class = ServiceUpdateStateSerializer
     permission_classes = [IsAuthenticated]
 
 
@@ -89,3 +103,16 @@ class StatisticsView(mixins.ListModelMixin,
     queryset = StatisticsModel.objects.all()
     serializer_class = StatisticsSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+
+
+class StatesView(mixins.ListModelMixin,
+                 viewsets.GenericViewSet):
+    """
+    view for getting states dict R
+    """
+
+    permission_classes = [IsAuthenticated]
+
+    @staticmethod
+    def list(request, *args, **kwargs):
+        return JsonResponse(data=STATE_CONSTS, status=200)

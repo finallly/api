@@ -90,6 +90,12 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
+STATE_CONSTS = {
+    '0': 'work',
+    '1': 'wait',
+    '2': 'sleep'
+}
+
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
